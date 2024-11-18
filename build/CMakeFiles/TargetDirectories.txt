@@ -1,0 +1,3 @@
+/home/thomas/MOD/build/CMakeFiles/main.dir
+/home/thomas/MOD/build/CMakeFiles/edit_cache.dir
+/home/thomas/MOD/build/CMakeFiles/rebuild_cache.dir

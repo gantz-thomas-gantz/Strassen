@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(EX1)
-add_executable(test_queue src/test_queue.c src/circular_buffer_queue.c)
-target_include_directories(test_queue PUBLIC include)
+add_executable(main src/main.c src/IO.c src/naive_matmat.c)
+target_include_directories(main PUBLIC include)
+target_link_libraries(main -lm)
+target_link_libraries(main -lopenblas)
+
