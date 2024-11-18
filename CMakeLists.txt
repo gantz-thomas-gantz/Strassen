@@ -3,5 +3,5 @@ project(EX1)
 add_executable(main src/main.c src/IO.c src/naive_matmat.c)
 target_include_directories(main PUBLIC include)
 target_link_libraries(main -lm)
-target_link_libraries(main -lopenblas)
+target_link_libraries(main -lcblas)
 
