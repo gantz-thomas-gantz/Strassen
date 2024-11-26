@@ -7,6 +7,19 @@
 
 /*
  * Description:
+ * Compare two double matrices.
+ *
+ * Return:
+ * If 0, wrong result, if 1 correct.
+ *
+ * Matrix format:
+ * Matrices should be flattened arrays in row-major format.
+ */
+int compare_mat(const double *const A, const double *const B, const size_t m,
+		const size_t n);
+
+/*
+ * Description:
  * Call naive_matmat implementation and time, also compare to CBLAS to assert
  * correctness of result.
  *
@@ -16,6 +29,5 @@
  * Matrix format:
  * Matrices should be flattened arrays in row-major format.
  */
-double test_naive_matmat(double *A, double *B, double *C, const size_t m,
-			 const size_t n, const size_t k);
+double test_naive_matmat(const size_t N, const double eps);
 
