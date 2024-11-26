@@ -55,8 +55,27 @@ double *pad_matrix(const double *A, size_t m, size_t n, size_t *new_m,
 		for (size_t i = 0; i < m; i++)
 			for (size_t j = 0; j < n; j++)
 				padded_A[i * (*new_n) + j] = A[i * n + j];
+		free(A);
 		return padded_A;
 	}
+	return A;
+}
+
+double *depad_matrix(double *padded_A, size_t m, size_t n, size_t og_m,
+		     size_t og_n) {
+	// If the padded dimensions match the original, no need to depad
+	if (m == og_m && n == og_n) {
+		return padded_A;
+	}
+	// Allocate memory for the original matrix
+	double *A = (double *)malloc(og_m * og_n * sizeof(double));
+	// Copy elements from the padded matrix to the original matrix
+	for (size_t i = 0; i < og_m; i++) {
+		for (size_t j = 0; j < og_n; j++) {
+			A[i * og_n + j] = padded_A[i * n + j];
+		}
+	}
+	free(padded_A);
 	return A;
 }
 
@@ -68,23 +87,34 @@ void strassen_matmat(double *A, double *B, double *C, const size_t m,
 		for (size_t i = 0; i < m * k; i++) C[i] = A[i] * B[0];
 	} else {
 		for (size_t i = 0; i < m * k; i++) C[i] = 0;
-		size_t new_n;
-		size_t new_m;
-		pad_matrix(A, size_t m, size_t n, size_t &new_m, size_t &new_n);
+
+		// Pad matrices if needed
+		size_t og_m = m;
+		size_t og_n = n;
+		size_t og_k = k;
+		pad_matrix(A, og_m, og_n, &m, &n);
+		pad_matrix(B, og_n, og_k, &n, &k);
+		pad_matrix(C, og_m, og_k, &m, &k);
+		// Define block start indices
 		const size_t start_a = 0;
 		const size_t start_x = 0;
+		const size_t start_r11 = 0;
 		const size_t start_b = n / 2;
 		const size_t start_y = k / 2;
+		const size_t start_r12 = k / 2;
 		const size_t start_c = m / 2 * n;
 		const size_t start_z = n / 2 * k;
+		const size_t start_r21 = m / 2 * k;
 		const size_t start_d = start_c + start_b;
-		start_t = start_y + start_z;
-
+		const size_t start_t = start_y + start_z;
+		const size_t start_r22 = start_r12 + start_r21;
+		// Deep copy block matrices into contiguous memory
 		double *a = create_block(A, start_a, m, n);
 		double *d = create_block(A, start_d, m, n);
 		double *y = create_block(B, start_y, n, k);
 		double *z = create_block(B, start_z, n, k);
 
+		// Compute q coefficients
 		double *q1 = (double *)malloc(m * k / 4 * sizeof(double));
 		double *temp1 =
 		    darray_block_add(B, start_x, start_z, n, k, 1.0);
@@ -165,7 +195,11 @@ void strassen_matmat(double *A, double *B, double *C, const size_t m,
 		free(q5);
 		free(q6);
 		free(q7);
+
+		// DEPAD HERE
+		depad_matrix(A, m, n, og_m, og_n);
+		depad_matrix(B, n, k, og_n, og_k);
+		depad_matrix(C, m, k, og_m, og_k);
 	}
 }
 
-void recursive_strassen(double *A1, A2, A3, A4, );
