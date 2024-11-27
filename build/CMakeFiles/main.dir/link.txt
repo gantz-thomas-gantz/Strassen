@@ -1,1 +1,1 @@
-/usr/bin/cc CMakeFiles/main.dir/src/main.c.o CMakeFiles/main.dir/src/IO.c.o CMakeFiles/main.dir/src/naive_matmat.c.o CMakeFiles/main.dir/src/test.c.o -o main  -lm -lcblas
+/Library/Developer/CommandLineTools/usr/bin/cc  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/main.dir/src/main.c.o CMakeFiles/main.dir/src/IO.c.o CMakeFiles/main.dir/src/naive_matmat.c.o CMakeFiles/main.dir/src/test.c.o -o main  -lm -lcblas 

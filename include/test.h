@@ -31,3 +31,16 @@ int compare_mat(const double *const A, const double *const B, const size_t m,
  */
 double test_naive_matmat(const size_t N, const double eps);
 
+
+/*
+ * Description:
+ * Call strassen_matmat implementation and time, also compare to CBLAS to assert
+ * correctness of result.
+ *
+ * Return:
+ * time in seconds. If -1, wrong result.
+ *
+ * Matrix format:
+ * Matrices should be flattened arrays in row-major format.
+ */
+double test_strassen_matmat(const size_t N, const double eps);
