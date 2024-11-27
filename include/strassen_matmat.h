@@ -13,6 +13,6 @@
  * Matrix format:
  * Matrices should be flattened arrays in row-major format.
  */
-void strassen_matmat(double *A, double *B, double *C, const size_t m,
-		     const size_t n, const size_t k);
+void strassen_matmat(double **A, double **B, double **C, size_t m, size_t n,
+		     size_t k);
 

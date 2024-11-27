@@ -4,7 +4,6 @@
  */
 
 #include <stddef.h>  // for size_t
-
 /*
  * Description:
  * Compare two double matrices.
@@ -30,7 +29,6 @@ int compare_mat(const double *const A, const double *const B, const size_t m,
  * Matrices should be flattened arrays in row-major format.
  */
 double test_naive_matmat(const size_t N, const double eps);
-
 
 /*
  * Description:

@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/main.c.o.d"
   "CMakeFiles/main.dir/src/naive_matmat.c.o"
   "CMakeFiles/main.dir/src/naive_matmat.c.o.d"
+  "CMakeFiles/main.dir/src/strassen_matmat.c.o"
+  "CMakeFiles/main.dir/src/strassen_matmat.c.o.d"
   "CMakeFiles/main.dir/src/test.c.o"
   "CMakeFiles/main.dir/src/test.c.o.d"
   "main"
