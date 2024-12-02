@@ -61,16 +61,18 @@ double test_naive_matmat(const size_t N, const double eps) {
 double test_strassen_matmat(const size_t N, const double eps) {
 	const size_t n = pow(2, N);
 	const size_t m = n + 1;
+	// const size_t m = n;
 	const size_t k = n - 1;
+	// const size_t k = n;
 	double *A = malloc(m * n * sizeof(double));
 	double *B = malloc(n * k * sizeof(double));
 	double *C = malloc(m * k * sizeof(double));
 	double *C_gt = malloc(m * k * sizeof(double));
 	gen_rand_matrix(A, m, n);
 	gen_rand_matrix(B, n, k);
-	printf("Matrix A (before strassen_matmat)\n");
-	print_mat_double(A, m, n);
-	printf("-------\n");
+	// printf("Matrix A (before strassen_matmat)\n");
+	// print_mat_double(A, m, n);
+	// printf("-------\n");
 
 	cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, k, n, 1., A,
 		    n, B, k, 0., C_gt, k);
@@ -80,14 +82,14 @@ double test_strassen_matmat(const size_t N, const double eps) {
 	clock_t end = clock();	// Record end time
 	double time_spent =
 	    (double)(end - start) / CLOCKS_PER_SEC;  // Calculate elapsed time
-	printf("Matrix A (after strassen_matmat)\n");
+	/*printf("Matrix A (after strassen_matmat)\n");
 	print_mat_double(A, m, n);
 	printf("-------\n");
 	printf("Matrix C\n");
 	print_mat_double(C, m, k);
 	printf("------\n");
 	printf("Matrix C_gt\n");
-	print_mat_double(C_gt, m, k);
+	print_mat_double(C_gt, m, k);*/
 	if (compare_mat(C, C_gt, m, k, eps))
 		return time_spent;
 	else
