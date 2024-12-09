@@ -44,10 +44,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1429/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1433/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1429/bin/cmake -E rm -f
+RM = /snap/cmake/1433/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -100,10 +100,24 @@ CMakeFiles/main.dir/src/IO.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/main.dir/src/IO.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/janmarxen/MU4IN901/MOD/src/IO.c -o CMakeFiles/main.dir/src/IO.c.s
 
+CMakeFiles/main.dir/src/block_utilities.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/block_utilities.c.o: /home/janmarxen/MU4IN901/MOD/src/block_utilities.c
+CMakeFiles/main.dir/src/block_utilities.c.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4IN901/MOD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/main.dir/src/block_utilities.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/src/block_utilities.c.o -MF CMakeFiles/main.dir/src/block_utilities.c.o.d -o CMakeFiles/main.dir/src/block_utilities.c.o -c /home/janmarxen/MU4IN901/MOD/src/block_utilities.c
+
+CMakeFiles/main.dir/src/block_utilities.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/main.dir/src/block_utilities.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/janmarxen/MU4IN901/MOD/src/block_utilities.c > CMakeFiles/main.dir/src/block_utilities.c.i
+
+CMakeFiles/main.dir/src/block_utilities.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/main.dir/src/block_utilities.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/janmarxen/MU4IN901/MOD/src/block_utilities.c -o CMakeFiles/main.dir/src/block_utilities.c.s
+
 CMakeFiles/main.dir/src/naive_matmat.c.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/naive_matmat.c.o: /home/janmarxen/MU4IN901/MOD/src/naive_matmat.c
 CMakeFiles/main.dir/src/naive_matmat.c.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4IN901/MOD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/main.dir/src/naive_matmat.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4IN901/MOD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/main.dir/src/naive_matmat.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/src/naive_matmat.c.o -MF CMakeFiles/main.dir/src/naive_matmat.c.o.d -o CMakeFiles/main.dir/src/naive_matmat.c.o -c /home/janmarxen/MU4IN901/MOD/src/naive_matmat.c
 
 CMakeFiles/main.dir/src/naive_matmat.c.i: cmake_force
@@ -117,7 +131,7 @@ CMakeFiles/main.dir/src/naive_matmat.c.s: cmake_force
 CMakeFiles/main.dir/src/strassen_matmat.c.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/strassen_matmat.c.o: /home/janmarxen/MU4IN901/MOD/src/strassen_matmat.c
 CMakeFiles/main.dir/src/strassen_matmat.c.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4IN901/MOD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/main.dir/src/strassen_matmat.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4IN901/MOD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/main.dir/src/strassen_matmat.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/src/strassen_matmat.c.o -MF CMakeFiles/main.dir/src/strassen_matmat.c.o.d -o CMakeFiles/main.dir/src/strassen_matmat.c.o -c /home/janmarxen/MU4IN901/MOD/src/strassen_matmat.c
 
 CMakeFiles/main.dir/src/strassen_matmat.c.i: cmake_force
@@ -128,10 +142,24 @@ CMakeFiles/main.dir/src/strassen_matmat.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/main.dir/src/strassen_matmat.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/janmarxen/MU4IN901/MOD/src/strassen_matmat.c -o CMakeFiles/main.dir/src/strassen_matmat.c.s
 
+CMakeFiles/main.dir/src/strassen_inv.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/strassen_inv.c.o: /home/janmarxen/MU4IN901/MOD/src/strassen_inv.c
+CMakeFiles/main.dir/src/strassen_inv.c.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4IN901/MOD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/main.dir/src/strassen_inv.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/src/strassen_inv.c.o -MF CMakeFiles/main.dir/src/strassen_inv.c.o.d -o CMakeFiles/main.dir/src/strassen_inv.c.o -c /home/janmarxen/MU4IN901/MOD/src/strassen_inv.c
+
+CMakeFiles/main.dir/src/strassen_inv.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/main.dir/src/strassen_inv.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/janmarxen/MU4IN901/MOD/src/strassen_inv.c > CMakeFiles/main.dir/src/strassen_inv.c.i
+
+CMakeFiles/main.dir/src/strassen_inv.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/main.dir/src/strassen_inv.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/janmarxen/MU4IN901/MOD/src/strassen_inv.c -o CMakeFiles/main.dir/src/strassen_inv.c.s
+
 CMakeFiles/main.dir/src/test.c.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/test.c.o: /home/janmarxen/MU4IN901/MOD/src/test.c
 CMakeFiles/main.dir/src/test.c.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4IN901/MOD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/main.dir/src/test.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4IN901/MOD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/main.dir/src/test.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/src/test.c.o -MF CMakeFiles/main.dir/src/test.c.o.d -o CMakeFiles/main.dir/src/test.c.o -c /home/janmarxen/MU4IN901/MOD/src/test.c
 
 CMakeFiles/main.dir/src/test.c.i: cmake_force
@@ -146,8 +174,10 @@ CMakeFiles/main.dir/src/test.c.s: cmake_force
 main_OBJECTS = \
 "CMakeFiles/main.dir/src/main.c.o" \
 "CMakeFiles/main.dir/src/IO.c.o" \
+"CMakeFiles/main.dir/src/block_utilities.c.o" \
 "CMakeFiles/main.dir/src/naive_matmat.c.o" \
 "CMakeFiles/main.dir/src/strassen_matmat.c.o" \
+"CMakeFiles/main.dir/src/strassen_inv.c.o" \
 "CMakeFiles/main.dir/src/test.c.o"
 
 # External object files for target main
@@ -155,12 +185,14 @@ main_EXTERNAL_OBJECTS =
 
 main: CMakeFiles/main.dir/src/main.c.o
 main: CMakeFiles/main.dir/src/IO.c.o
+main: CMakeFiles/main.dir/src/block_utilities.c.o
 main: CMakeFiles/main.dir/src/naive_matmat.c.o
 main: CMakeFiles/main.dir/src/strassen_matmat.c.o
+main: CMakeFiles/main.dir/src/strassen_inv.c.o
 main: CMakeFiles/main.dir/src/test.c.o
 main: CMakeFiles/main.dir/build.make
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/janmarxen/MU4IN901/MOD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/janmarxen/MU4IN901/MOD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

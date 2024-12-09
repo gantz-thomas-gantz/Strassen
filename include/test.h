@@ -42,3 +42,8 @@ double test_naive_matmat(const size_t N, const double eps);
  * Matrices should be flattened arrays in row-major format.
  */
 double test_strassen_matmat(const size_t N, const double eps);
+// note: reason for strassen_inverse_strassen_matmat is a bit slower for small
+// matrices is that strassen_matmat calls on naive_matmat function. overhead !
+double test_strassen_invert_strassen_matmat(const size_t N, const double eps);
+
+double test_strassen_invert_naive_matmat(const size_t N, const double eps);

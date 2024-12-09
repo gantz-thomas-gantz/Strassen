@@ -48,10 +48,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1429/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1433/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1429/bin/cmake -E rm -f
+RM = /snap/cmake/1433/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /home/janmarxen/MU4IN901/MOD/build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
-	/snap/cmake/1429/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/cmake/1433/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/snap/cmake/1429/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/cmake/1433/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -153,6 +153,30 @@ src/IO.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/IO.c.s
 .PHONY : src/IO.c.s
 
+src/block_utilities.o: src/block_utilities.c.o
+.PHONY : src/block_utilities.o
+
+# target to build an object file
+src/block_utilities.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/block_utilities.c.o
+.PHONY : src/block_utilities.c.o
+
+src/block_utilities.i: src/block_utilities.c.i
+.PHONY : src/block_utilities.i
+
+# target to preprocess a source file
+src/block_utilities.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/block_utilities.c.i
+.PHONY : src/block_utilities.c.i
+
+src/block_utilities.s: src/block_utilities.c.s
+.PHONY : src/block_utilities.s
+
+# target to generate assembly for a file
+src/block_utilities.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/block_utilities.c.s
+.PHONY : src/block_utilities.c.s
+
 src/main.o: src/main.c.o
 .PHONY : src/main.o
 
@@ -200,6 +224,30 @@ src/naive_matmat.s: src/naive_matmat.c.s
 src/naive_matmat.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/naive_matmat.c.s
 .PHONY : src/naive_matmat.c.s
+
+src/strassen_inv.o: src/strassen_inv.c.o
+.PHONY : src/strassen_inv.o
+
+# target to build an object file
+src/strassen_inv.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/strassen_inv.c.o
+.PHONY : src/strassen_inv.c.o
+
+src/strassen_inv.i: src/strassen_inv.c.i
+.PHONY : src/strassen_inv.i
+
+# target to preprocess a source file
+src/strassen_inv.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/strassen_inv.c.i
+.PHONY : src/strassen_inv.c.i
+
+src/strassen_inv.s: src/strassen_inv.c.s
+.PHONY : src/strassen_inv.s
+
+# target to generate assembly for a file
+src/strassen_inv.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/strassen_inv.c.s
+.PHONY : src/strassen_inv.c.s
 
 src/strassen_matmat.o: src/strassen_matmat.c.o
 .PHONY : src/strassen_matmat.o
@@ -261,12 +309,18 @@ help:
 	@echo "... src/IO.o"
 	@echo "... src/IO.i"
 	@echo "... src/IO.s"
+	@echo "... src/block_utilities.o"
+	@echo "... src/block_utilities.i"
+	@echo "... src/block_utilities.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/naive_matmat.o"
 	@echo "... src/naive_matmat.i"
 	@echo "... src/naive_matmat.s"
+	@echo "... src/strassen_inv.o"
+	@echo "... src/strassen_inv.i"
+	@echo "... src/strassen_inv.s"
 	@echo "... src/strassen_matmat.o"
 	@echo "... src/strassen_matmat.i"
 	@echo "... src/strassen_matmat.s"

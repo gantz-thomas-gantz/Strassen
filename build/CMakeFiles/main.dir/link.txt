@@ -1,1 +1,1 @@
-/usr/bin/cc CMakeFiles/main.dir/src/main.c.o CMakeFiles/main.dir/src/IO.c.o CMakeFiles/main.dir/src/naive_matmat.c.o CMakeFiles/main.dir/src/strassen_matmat.c.o CMakeFiles/main.dir/src/test.c.o -o main  -lm -lcblas
+/usr/bin/cc CMakeFiles/main.dir/src/main.c.o CMakeFiles/main.dir/src/IO.c.o CMakeFiles/main.dir/src/block_utilities.c.o CMakeFiles/main.dir/src/naive_matmat.c.o CMakeFiles/main.dir/src/strassen_matmat.c.o CMakeFiles/main.dir/src/strassen_inv.c.o CMakeFiles/main.dir/src/test.c.o -o main  -lm -llapacke -lcblas -lm -llapacke -lcblas

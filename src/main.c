@@ -18,5 +18,9 @@ int main(int argc, char *argv[]) {
 		       test_naive_matmat(i, 0.001));
 		printf("test_strassen_matmat time: %lf \n",
 		       test_strassen_matmat(i, 0.001));
+		printf("test_strassen_invert_strassen_matmat time: %lf \n",
+		       test_strassen_invert_strassen_matmat(i, 0.001));
+		printf("test_strassen_invert_naive_matmat time: %lf\n",
+		       test_strassen_invert_naive_matmat(i, 0.001));
 	}
 }

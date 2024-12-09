@@ -2,16 +2,21 @@
  * DESC: Module for naive matrix multiplication.
  * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
  */
-
+// TODO: generate same random matrix for same functionality such that tests are
+// comparable
 #include <cblas.h>
+#include <lapacke.h>
 #include <math.h>
 #include <stddef.h>  // for size_t
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "../include/IO.h"
 #include "../include/naive_matmat.h"
+#include "../include/strassen_inv.h"
 #include "../include/strassen_matmat.h"
 
 /* generate a random floating point number from min to max */
@@ -49,30 +54,25 @@ double test_naive_matmat(const size_t N, const double eps) {
 	    (double)(end - start) / CLOCKS_PER_SEC;  // Calculate elapsed time
 	cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, k, n, 1., A,
 		    n, B, k, 0., C_gt, k);
-	if (compare_mat(C, C_gt, m, k, eps))
-		return time_spent;
-	else
-		return -1.0;
+	double result = -1.0;
+	if (compare_mat(C, C_gt, m, k, eps)) result = time_spent;
 	free(A);
 	free(B);
 	free(C);
 	free(C_gt);
+
+	return result;
 }
 double test_strassen_matmat(const size_t N, const double eps) {
 	const size_t n = pow(2, N);
 	const size_t m = n + 1;
-	// const size_t m = n;
 	const size_t k = n - 1;
-	// const size_t k = n;
 	double *A = malloc(m * n * sizeof(double));
 	double *B = malloc(n * k * sizeof(double));
 	double *C = malloc(m * k * sizeof(double));
 	double *C_gt = malloc(m * k * sizeof(double));
 	gen_rand_matrix(A, m, n);
 	gen_rand_matrix(B, n, k);
-	// printf("Matrix A (before strassen_matmat)\n");
-	// print_mat_double(A, m, n);
-	// printf("-------\n");
 
 	cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, k, n, 1., A,
 		    n, B, k, 0., C_gt, k);
@@ -82,21 +82,69 @@ double test_strassen_matmat(const size_t N, const double eps) {
 	clock_t end = clock();	// Record end time
 	double time_spent =
 	    (double)(end - start) / CLOCKS_PER_SEC;  // Calculate elapsed time
-	/*printf("Matrix A (after strassen_matmat)\n");
-	print_mat_double(A, m, n);
-	printf("-------\n");
-	printf("Matrix C\n");
-	print_mat_double(C, m, k);
-	printf("------\n");
-	printf("Matrix C_gt\n");
-	print_mat_double(C_gt, m, k);*/
-	if (compare_mat(C, C_gt, m, k, eps))
-		return time_spent;
-	else
-		return -1.0;
+	double result = -1.0;
+	if (compare_mat(C, C_gt, m, k, eps)) result = time_spent;
 	free(A);
 	free(B);
 	free(C);
 	free(C_gt);
+
+	return result;
+};
+
+// TODO: make sure matrix is invertible, else gen new matrix
+double test_strassen_invert_strassen_matmat(const size_t N, const double eps) {
+	const size_t n = pow(2, N);
+	double *A = malloc(n * n * sizeof(double));
+	double *inverse_A = malloc(n * n * sizeof(double));
+	double *inverse_A_gt = malloc(n * n * sizeof(double));
+	gen_rand_matrix(A, n, n);
+	int *ipiv = malloc(n * sizeof(int));  // Pivot indices
+	memcpy(inverse_A_gt, A, n * n * sizeof(double));
+	LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, inverse_A_gt, n, ipiv);
+	LAPACKE_dgetri(LAPACK_ROW_MAJOR, n, inverse_A_gt, n, ipiv);
+
+	clock_t start = clock();  // Record start time
+	strassen_invert_strassen_matmat(A, inverse_A, n);
+	clock_t end = clock();	// Record end time
+	double time_spent =
+	    (double)(end - start) / CLOCKS_PER_SEC;  // Calculate elapsed time
+	double result = -1.0;
+	if (compare_mat(inverse_A, inverse_A_gt, n, n, eps))
+		result = time_spent;
+
+	free(A);
+	free(ipiv);
+	free(inverse_A);
+	free(inverse_A_gt);
+
+	return result;
+};
+double test_strassen_invert_naive_matmat(const size_t N, const double eps) {
+	const size_t n = pow(2, N);
+	double *A = malloc(n * n * sizeof(double));
+	double *inverse_A = malloc(n * n * sizeof(double));
+	double *inverse_A_gt = malloc(n * n * sizeof(double));
+	gen_rand_matrix(A, n, n);
+	int *ipiv = malloc(n * sizeof(int));  // Pivot indices
+	memcpy(inverse_A_gt, A, n * n * sizeof(double));
+	LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, inverse_A_gt, n, ipiv);
+	LAPACKE_dgetri(LAPACK_ROW_MAJOR, n, inverse_A_gt, n, ipiv);
+
+	clock_t start = clock();  // Record start time
+	strassen_invert_naive_matmat(A, inverse_A, n);
+	clock_t end = clock();	// Record end time
+	double time_spent =
+	    (double)(end - start) / CLOCKS_PER_SEC;  // Calculate elapsed time
+	double result = -1.0;
+	if (compare_mat(inverse_A, inverse_A_gt, n, n, eps))
+		result = time_spent;
+
+	free(A);
+	free(ipiv);
+	free(inverse_A);
+	free(inverse_A_gt);
+
+	return result;
 };
 
