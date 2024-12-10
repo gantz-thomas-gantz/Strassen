@@ -17,6 +17,7 @@
 int compare_mat(const double *const A, const double *const B, const size_t m,
 		const size_t n);
 
+void gen_rand_matrix(double *A, const size_t m, const size_t n);
 /*
  * Description:
  * Call naive_matmat implementation and time, also compare to CBLAS to assert
@@ -42,8 +43,13 @@ double test_naive_matmat(const size_t N, const double eps);
  * Matrices should be flattened arrays in row-major format.
  */
 double test_strassen_matmat(const size_t N, const double eps);
+
+int is_invertible(double *A, int n);
+
 // note: reason for strassen_inverse_strassen_matmat is a bit slower for small
 // matrices is that strassen_matmat calls on naive_matmat function. overhead !
-double test_strassen_invert_strassen_matmat(const size_t N, const double eps);
+double test_strassen_invert_strassen_matmat(double *A, const size_t n,
+					    const double eps);
 
-double test_strassen_invert_naive_matmat(const size_t N, const double eps);
+double test_strassen_invert_naive_matmat(double *A, const size_t n,
+					 const double eps);

@@ -3,7 +3,7 @@
  * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
  */
 // TODO: generate same random matrix for same functionality such that tests are
-// comparable
+// comparable (done for inversion, todo for multiplication)
 #include <cblas.h>
 #include <lapacke.h>
 #include <math.h>
@@ -92,13 +92,23 @@ double test_strassen_matmat(const size_t N, const double eps) {
 	return result;
 };
 
-// TODO: make sure matrix is invertible, else gen new matrix
-double test_strassen_invert_strassen_matmat(const size_t N, const double eps) {
-	const size_t n = pow(2, N);
-	double *A = malloc(n * n * sizeof(double));
+int is_invertible(double *A, int n) {
+	int *ipiv = (int *)malloc(n * sizeof(int));  // Pivot indices
+	int info;
+
+	// Perform LU decomposition
+	info = LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, A, n, ipiv);
+
+	free(ipiv);
+
+	// If info > 0, the matrix is singular
+	return info == 0;  // Returns 1 if invertible, 0 if not
+}
+
+double test_strassen_invert_strassen_matmat(double *A, const size_t n,
+					    const double eps) {
 	double *inverse_A = malloc(n * n * sizeof(double));
 	double *inverse_A_gt = malloc(n * n * sizeof(double));
-	gen_rand_matrix(A, n, n);
 	int *ipiv = malloc(n * sizeof(int));  // Pivot indices
 	memcpy(inverse_A_gt, A, n * n * sizeof(double));
 	LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, inverse_A_gt, n, ipiv);
@@ -113,19 +123,16 @@ double test_strassen_invert_strassen_matmat(const size_t N, const double eps) {
 	if (compare_mat(inverse_A, inverse_A_gt, n, n, eps))
 		result = time_spent;
 
-	free(A);
 	free(ipiv);
 	free(inverse_A);
 	free(inverse_A_gt);
 
 	return result;
 };
-double test_strassen_invert_naive_matmat(const size_t N, const double eps) {
-	const size_t n = pow(2, N);
-	double *A = malloc(n * n * sizeof(double));
+double test_strassen_invert_naive_matmat(double *A, const size_t n,
+					 const double eps) {
 	double *inverse_A = malloc(n * n * sizeof(double));
 	double *inverse_A_gt = malloc(n * n * sizeof(double));
-	gen_rand_matrix(A, n, n);
 	int *ipiv = malloc(n * sizeof(int));  // Pivot indices
 	memcpy(inverse_A_gt, A, n * n * sizeof(double));
 	LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, inverse_A_gt, n, ipiv);
@@ -140,7 +147,6 @@ double test_strassen_invert_naive_matmat(const size_t N, const double eps) {
 	if (compare_mat(inverse_A, inverse_A_gt, n, n, eps))
 		result = time_spent;
 
-	free(A);
 	free(ipiv);
 	free(inverse_A);
 	free(inverse_A_gt);

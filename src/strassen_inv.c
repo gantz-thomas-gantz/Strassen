@@ -84,7 +84,6 @@ void strassen_invert_naive_matmat(double *A, double *inverse_A,
 	strassen_invert_naive_matmat(a, e, n / 2);
 	double *ce = (double *)malloc(n * n / 4 * sizeof(double));
 	naive_matmat(c, e, ce, n / 2, n / 2, n / 2);
-	printf("Start %lf and End %lf \n", (double)start, (double)end);
 
 	double *temp1 = (double *)malloc(n * n / 4 * sizeof(double));
 	naive_matmat(ce, b, temp1, n / 2, n / 2, n / 2);
