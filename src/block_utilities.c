@@ -37,9 +37,21 @@ void mat_inplace_block_add(double *C, const double *const a,
 			   const size_t m, const size_t n, const double alpha,
 			   const double beta) {
 	assert((start + (m / 2 - 1) * n + (n / 2 - 1) < m * n));
-	for (size_t i = 0; i < m / 2; i++)
-		for (size_t j = 0; j < n / 2; j++)
-			C[start + i * n + j] +=
-			    alpha * a[i * n / 2 + j] + beta * b[i * n / 2 + j];
+	if (b == NULL) {
+		for (size_t i = 0; i < m / 2; i++) {
+			for (size_t j = 0; j < n / 2; j++) {
+				C[start + i * n + j] +=
+				    alpha * a[i * n / 2 + j];
+			}
+		}
+	} else {
+		for (size_t i = 0; i < m / 2; i++) {
+			for (size_t j = 0; j < n / 2; j++) {
+				C[start + i * n + j] +=
+				    alpha * a[i * n / 2 + j] +
+				    beta * b[i * n / 2 + j];
+			}
+		}
+	}
 }
 

@@ -107,32 +107,30 @@ int is_invertible(double *A, int n) {
 
 double test_strassen_invert_strassen_matmat(double *A, const size_t n,
 					    const double eps) {
-	double *inverse_A = malloc(n * n * sizeof(double));
-	double *inverse_A_gt = malloc(n * n * sizeof(double));
+	double *inverse_A = calloc(n * n, sizeof(double));
+	double *inverse_A_gt = calloc(n * n, sizeof(double));
 	int *ipiv = malloc(n * sizeof(int));  // Pivot indices
 	memcpy(inverse_A_gt, A, n * n * sizeof(double));
 	LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, inverse_A_gt, n, ipiv);
 	LAPACKE_dgetri(LAPACK_ROW_MAJOR, n, inverse_A_gt, n, ipiv);
 
 	clock_t start = clock();  // Record start time
-	strassen_invert_strassen_matmat(A, inverse_A, n);
+	strassen_invert_strassen_matmat(&A, &inverse_A, n);
 	clock_t end = clock();	// Record end time
 	double time_spent =
 	    (double)(end - start) / CLOCKS_PER_SEC;  // Calculate elapsed time
 	double result = -1.0;
 	if (compare_mat(inverse_A, inverse_A_gt, n, n, eps))
 		result = time_spent;
-
 	free(ipiv);
 	free(inverse_A);
 	free(inverse_A_gt);
-
 	return result;
 };
 double test_strassen_invert_naive_matmat(double *A, const size_t n,
 					 const double eps) {
-	double *inverse_A = malloc(n * n * sizeof(double));
-	double *inverse_A_gt = malloc(n * n * sizeof(double));
+	double *inverse_A = calloc(n * n, sizeof(double));
+	double *inverse_A_gt = calloc(n * n, sizeof(double));
 	int *ipiv = malloc(n * sizeof(int));  // Pivot indices
 	memcpy(inverse_A_gt, A, n * n * sizeof(double));
 	LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, inverse_A_gt, n, ipiv);

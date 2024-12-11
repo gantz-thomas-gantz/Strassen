@@ -197,6 +197,7 @@ CMakeFiles/main.dir/src/naive_matmat.c.o: /home/janmarxen/MU4IN901/MOD/src/naive
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
 
 CMakeFiles/main.dir/src/strassen_inv.c.o: /home/janmarxen/MU4IN901/MOD/src/strassen_inv.c \
+  /home/janmarxen/MU4IN901/MOD/include/IO.h \
   /home/janmarxen/MU4IN901/MOD/include/block_utilities.h \
   /home/janmarxen/MU4IN901/MOD/include/naive_matmat.h \
   /home/janmarxen/MU4IN901/MOD/include/strassen_matmat.h \
@@ -205,6 +206,7 @@ CMakeFiles/main.dir/src/strassen_inv.c.o: /home/janmarxen/MU4IN901/MOD/src/stras
   /usr/include/features-time64.h \
   /usr/include/features.h \
   /usr/include/stdc-predef.h \
+  /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
@@ -218,6 +220,7 @@ CMakeFiles/main.dir/src/strassen_inv.c.o: /home/janmarxen/MU4IN901/MOD/src/stras
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
@@ -225,10 +228,16 @@ CMakeFiles/main.dir/src/strassen_inv.c.o: /home/janmarxen/MU4IN901/MOD/src/stras
   /usr/include/x86_64-linux-gnu/bits/time64.h \
   /usr/include/x86_64-linux-gnu/bits/timesize.h \
   /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
@@ -243,6 +252,8 @@ CMakeFiles/main.dir/src/strassen_inv.c.o: /home/janmarxen/MU4IN901/MOD/src/stras
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
 
 CMakeFiles/main.dir/src/strassen_matmat.c.o: /home/janmarxen/MU4IN901/MOD/src/strassen_matmat.c \
