@@ -13,12 +13,21 @@
 #include "../include/IO.h"
 #include "../include/test.h"
 
-// TODO: generate test data for matrix multiplication
+// Done: changes in main, test_naive_matmat, test_strassen_matmat
 // TODO: Test LU invert
 
 int main(int argc, char *argv[]) {
-	
-	const size_t N = 5;  // max power dimension of matrix
+    
+	size_t N = 5; // default max power dimension of matrix
+    // Check if an argument is provided for N
+    if (argc > 1) {
+        N = strtoul(argv[1], NULL, 10);
+        if (N == 0) {
+            fprintf(stderr, "Invalid input for N. Please provide a positive integer.\n");
+            return EXIT_FAILURE;
+        }
+    }
+
 	double tolerance = 1e-3;
 	srand(time(NULL));	 // random seed
 
@@ -26,7 +35,7 @@ int main(int argc, char *argv[]) {
 	FILE *file_matmat = fopen("data/matmat.txt", "w");
 	FILE *file_matinv = fopen("data/matinv.txt", "w");
 	
-	for (size_t i = 1; i < N; i++) {
+	for (size_t i = 1; i <= N; i++) {
 		
 		const size_t n = pow(2, i) - 1; // Test matrices how are not of size (2^n,2^n)
 
@@ -39,11 +48,19 @@ int main(int argc, char *argv[]) {
 
 		printf("### TEST 1 : Matrix Multiplication\n");
 
+		// Initialize data
+		const size_t m = n + 1;
+		const size_t k = n - 1;
+		double *A_mul = malloc(m * n * sizeof(double));
+		double *B_mul = malloc(n * k * sizeof(double));
+		gen_rand_matrix(A_mul, m, n);
+		gen_rand_matrix(B_mul, n, k);
+
 		// Perform tests
 		flush_cache();
-        double naive_time = test_naive_matmat(i, tolerance);
+        double naive_time = test_naive_matmat(&A_mul, &B_mul, m, n, k, tolerance);
 		flush_cache();
-        double strassen_time = test_strassen_matmat(i, tolerance);
+        double strassen_time = test_strassen_matmat(&A_mul, &B_mul, m, n, k, tolerance);
 
 		// Write to console
 		printf("- naive_matmat :    %.5lf\n", naive_time);
@@ -51,7 +68,11 @@ int main(int argc, char *argv[]) {
 		printf("\n");
 
 		// Write to file
-		fprintf(file_matmat, "%zu %lf %lf\n", i, naive_time, strassen_time);
+		fprintf(file_matmat, "%zu %.5lf %.5lf\n", i, naive_time, strassen_time);
+
+		// Free data
+		free(A_mul);
+		free(B_mul);
 		
 		/* ####################################################### */
 		
@@ -82,7 +103,7 @@ int main(int argc, char *argv[]) {
 		printf("\n");
 
 		// Write to file
-		fprintf(file_matinv, "%zu %lf %lf\n", i, time_strassen_invert_naive_matmat, time_strassen_invert_strassen_matmat);
+		fprintf(file_matinv, "%zu %.5lf %.5lf\n", i, time_strassen_invert_naive_matmat, time_strassen_invert_strassen_matmat);
 	
 		// free data
 		free(A);

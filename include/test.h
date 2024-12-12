@@ -32,7 +32,7 @@ void gen_rand_matrix(double *A, const size_t m, const size_t n);
  * Matrix format:
  * Matrices should be flattened arrays in row-major format.
  */
-double test_naive_matmat(const size_t N, const double eps);
+double test_naive_matmat(double **A, double **B, const size_t m, const size_t n, const size_t k, const double eps);
 
 /*
  * Description:
@@ -45,7 +45,7 @@ double test_naive_matmat(const size_t N, const double eps);
  * Matrix format:
  * Matrices should be flattened arrays in row-major format.
  */
-double test_strassen_matmat(const size_t N, const double eps);
+double test_strassen_matmat(double **A, double **B, const size_t m, const size_t n, const size_t k, const double eps);
 
 int is_invertible(double *A, int n);
 
