@@ -16,7 +16,7 @@
 #include <unistd.h>
 
 #include "../include/IO.h"
-#include "../include/lu_naive.h"
+//#include "../include/lu_naive.h"
 #include "../include/naive_matmat.h"
 #include "../include/strassen_inv.h"
 #include "../include/strassen_matmat.h"
@@ -163,7 +163,7 @@ double test_strassen_invert_naive_matmat(double **A, const size_t n,
 	return result;
 };
 
-double test_lu_invert(const double *const A, const size_t n, const double eps) {
+/*double test_lu_invert(const double *const A, const size_t n, const double eps) {
 	double *inverse_A = calloc(n * n, sizeof(double));
 	double *inverse_A_gt = calloc(n * n, sizeof(double));
 	int *ipiv = malloc(n * sizeof(int));  // Pivot indices
@@ -183,5 +183,5 @@ double test_lu_invert(const double *const A, const size_t n, const double eps) {
 	free(inverse_A);
 	free(inverse_A_gt);
 	return result;
-};
+};*/
 
