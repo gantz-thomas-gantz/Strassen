@@ -14,16 +14,7 @@
  * Matrix format:
  * Matrices should be flattened arrays in row-major format.
  */
-void naive_lu_decomposition(double *T, const size_t n);
-
-/*
- * Description:
- * Solve Ax=b (A size nxn, b size nx1, x size nx1) with naive LU decomposition.
- *
- * Matrix format:
- * Matrices should be flattened arrays in row-major format.
- */
-void naive_lu_solve(double *A, double *x, double *b, const size_t n);
+void lu_decomposition(double *A, double *T, const size_t n);
 
 /*
  * Description:
@@ -33,5 +24,5 @@ void naive_lu_solve(double *A, double *x, double *b, const size_t n);
  * Matrix format:
  * Matrices should be flattened arrays in row-major format.
  */
-void naive_lu_invert(double *A, double *inverse_A, const size_t n);
+void lu_invert(double *A, double *inverse_A, const size_t n);
 

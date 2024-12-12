@@ -329,6 +329,7 @@ CMakeFiles/main.dir/src/test.c.o: /home/janmarxen/MU4IN901/MOD/src/test.c \
   /usr/include/lapacke_mangling.h \
   /usr/include/math.h \
   /usr/include/stdc-predef.h \
+  /usr/include/stdint.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/string.h \
@@ -361,6 +362,7 @@ CMakeFiles/main.dir/src/test.c.o: /home/janmarxen/MU4IN901/MOD/src/test.c \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
@@ -393,6 +395,7 @@ CMakeFiles/main.dir/src/test.c.o: /home/janmarxen/MU4IN901/MOD/src/test.c \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+  /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/cblas.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
@@ -413,11 +416,17 @@ CMakeFiles/main.dir/src/test.c.o: /home/janmarxen/MU4IN901/MOD/src/test.c \
 
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
 /usr/include/x86_64-linux-gnu/bits/mathdef.h:
 
 /usr/include/x86_64-linux-gnu/bits/confname.h:
 
+/usr/include/stdint.h:
+
 /usr/include/lapacke_mangling.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
 /usr/include/lapacke.h:
 

@@ -4,6 +4,9 @@
  */
 
 #include <stddef.h>  // for size_t
+
+void flush_cache();
+
 /*
  * Description:
  * Compare two double matrices.
@@ -48,8 +51,8 @@ int is_invertible(double *A, int n);
 
 // note: reason for strassen_inverse_strassen_matmat is a bit slower for small
 // matrices is that strassen_matmat calls on naive_matmat function. overhead !
-double test_strassen_invert_strassen_matmat(double *A, const size_t n,
+double test_strassen_invert_strassen_matmat(double **A, const size_t n,
 					    const double eps);
 
-double test_strassen_invert_naive_matmat(double *A, const size_t n,
+double test_strassen_invert_naive_matmat(double **A, const size_t n,
 					 const double eps);

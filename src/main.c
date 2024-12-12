@@ -13,14 +13,15 @@
 #include "../include/test.h"
 
 int main(int argc, char *argv[]) {
-	const size_t N = 3;  // max power dimension of matrix
+	const size_t N = 12;  // max power dimension of matrix
 	srand(time(NULL));
-	for (size_t i = 1; i < N; i++) {
-		const size_t n = pow(2, i) - 1;
-
+	for (size_t i = 2; i < N; i++) {
+		const size_t n = pow(2, i) - 3;
 		printf("Size of test: %zu \n", i);
+		flush_cache();
 		printf("test_naive_matmat time: %lf \n",
 		       test_naive_matmat(i, 0.001));
+		flush_cache();
 		printf("test_strassen_matmat time: %lf \n",
 		       test_strassen_matmat(i, 0.001));
 
@@ -39,14 +40,12 @@ int main(int argc, char *argv[]) {
 		free(A_copy);
 
 		// Test the invert functions
-		// print_mat_double(A, n, n);
+		flush_cache();
+		printf("test_strassen_invert_naive_matmat time: %lf\n",
+		       test_strassen_invert_naive_matmat(&A, n, 0.001));
+		flush_cache();
 		printf("test_strassen_invert_strassen_matmat time: %lf \n",
-		       test_strassen_invert_strassen_matmat(A, n, 0.001));
-		// print_mat_double(A, n, n);
-		// printf("test_strassen_invert_naive_matmat time: %lf\n",
-		//       test_strassen_invert_naive_matmat(A, n, 0.001));
-		// print_mat_double(A, n, n);
+		       test_strassen_invert_strassen_matmat(&A, n, 0.001));
 		free(A);
-		printf("Main A free \n");
 	}
 }
