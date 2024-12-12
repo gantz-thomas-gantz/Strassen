@@ -2,8 +2,6 @@
  * DESC: Module for naive matrix multiplication.
  * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
  */
-// TODO: generate same random matrix for same functionality such that tests are
-// comparable (done for inversion, todo for multiplication)
 #include <cblas.h>
 #include <lapacke.h>
 #include <math.h>
@@ -16,7 +14,7 @@
 #include <unistd.h>
 
 #include "../include/IO.h"
-#include "../include/lu_naive.h"
+#include "../include/naive_lu.h"
 #include "../include/naive_matmat.h"
 #include "../include/strassen_inv.h"
 #include "../include/strassen_matmat.h"
@@ -167,7 +165,7 @@ double test_lu_invert(const double *const A, const size_t n, const double eps) {
 	double *inverse_A = calloc(n * n, sizeof(double));
 	double *inverse_A_gt = calloc(n * n, sizeof(double));
 	int *ipiv = malloc(n * sizeof(int));  // Pivot indices
-	memcpy(inverse_A_gt, *A, n * n * sizeof(double));
+	memcpy(inverse_A_gt, A, n * n * sizeof(double));
 	LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, inverse_A_gt, n, ipiv);
 	LAPACKE_dgetri(LAPACK_ROW_MAJOR, n, inverse_A_gt, n, ipiv);
 

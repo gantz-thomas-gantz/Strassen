@@ -1,5 +1,6 @@
 /*
- * DESC: Module for naive matrix multiplication.
+ * DESC: Result of file compilation to be executed. Runs tests on all
+ * implementations on different matrix sizes.
  * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
  */
 #include <math.h>    // for pow()
@@ -46,6 +47,9 @@ int main(int argc, char *argv[]) {
 		flush_cache();
 		printf("test_strassen_invert_strassen_matmat time: %lf \n",
 		       test_strassen_invert_strassen_matmat(&A, n, 0.001));
+		flush_cache();
+		printf("test_lu_invert time: %lf \n",
+		       test_lu_invert(A, n, 0.001));
 		free(A);
 	}
 }

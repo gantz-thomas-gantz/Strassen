@@ -1,5 +1,5 @@
 /*
- * DESC: Header of module for naive lu-decomposition, lu-solve and lu-inversion.
+ * DESC: Header of module for naive lu-decomposition and lu-inversion.
  * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
  */
 
@@ -14,7 +14,7 @@
  * Matrix format:
  * Matrices should be flattened arrays in row-major format.
  */
-void lu_decomposition(double *A, double *T, const size_t n);
+void lu_decomposition(const double *const A, double *T, const size_t n);
 
 /*
  * Description:
@@ -24,5 +24,5 @@ void lu_decomposition(double *A, double *T, const size_t n);
  * Matrix format:
  * Matrices should be flattened arrays in row-major format.
  */
-void lu_invert(double *A, double *inverse_A, const size_t n);
+void lu_invert(const double *const A, double *inverse_A, const size_t n);
 

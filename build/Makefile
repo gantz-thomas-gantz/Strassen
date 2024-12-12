@@ -201,6 +201,30 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/naive_lu.o: src/naive_lu.c.o
+.PHONY : src/naive_lu.o
+
+# target to build an object file
+src/naive_lu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/naive_lu.c.o
+.PHONY : src/naive_lu.c.o
+
+src/naive_lu.i: src/naive_lu.c.i
+.PHONY : src/naive_lu.i
+
+# target to preprocess a source file
+src/naive_lu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/naive_lu.c.i
+.PHONY : src/naive_lu.c.i
+
+src/naive_lu.s: src/naive_lu.c.s
+.PHONY : src/naive_lu.s
+
+# target to generate assembly for a file
+src/naive_lu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/naive_lu.c.s
+.PHONY : src/naive_lu.c.s
+
 src/naive_matmat.o: src/naive_matmat.c.o
 .PHONY : src/naive_matmat.o
 
@@ -315,6 +339,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/naive_lu.o"
+	@echo "... src/naive_lu.i"
+	@echo "... src/naive_lu.s"
 	@echo "... src/naive_matmat.o"
 	@echo "... src/naive_matmat.i"
 	@echo "... src/naive_matmat.s"

@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/block_utilities.c.o.d"
   "CMakeFiles/main.dir/src/main.c.o"
   "CMakeFiles/main.dir/src/main.c.o.d"
+  "CMakeFiles/main.dir/src/naive_lu.c.o"
+  "CMakeFiles/main.dir/src/naive_lu.c.o.d"
   "CMakeFiles/main.dir/src/naive_matmat.c.o"
   "CMakeFiles/main.dir/src/naive_matmat.c.o.d"
   "CMakeFiles/main.dir/src/strassen_inv.c.o"

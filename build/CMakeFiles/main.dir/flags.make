@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = -I/home/janmarxen/MU4IN901/MOD/include
 
-C_FLAGS = 
+C_FLAGS =  -O3 -Wall -Wextra
 

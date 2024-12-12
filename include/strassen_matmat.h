@@ -10,9 +10,8 @@
  * Multiply A (size mxn) with B (size nxk) using Strassen's multiplication
  * algorithm, store the result in C (size mxk).
  * Notes:
- * A, B & C: data doesn't change but location changes
+ * A, B & C: data doesn't change but memory location changes.
  * m, n, k change throughout but are the same at the end of recursion.
- * This is reason for not having constant args.
  *
  * Matrix format:
  * Matrices should be flattened arrays in row-major format and pointer of
