@@ -30,14 +30,11 @@ void flush_cache() {
 	}
 }
 
-/* generate a random floating point number from min to max */
-double randfrom(double min, double max) {
-	return (double)rand() / RAND_MAX;  // * (max - min);
-}
+double randfrom() { return (double)rand() / RAND_MAX; }
 
 void gen_rand_matrix(double *A, const size_t m, const size_t n) {
 	for (size_t i = 0; i < m * n; i++) {
-		A[i] = randfrom(0., 1.);
+		A[i] = randfrom();
 	}
 }
 

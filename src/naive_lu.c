@@ -15,9 +15,9 @@ static void init_T(const double *A, double *T, const size_t n) {
 }
 
 static void eliminate_step_i(double *T, const size_t n, int i) {
-	for (int j = i + 1; j < n; j++) {
+	for (size_t j = i + 1; j < n; j++) {
 		T[j * n + i] = T[j * n + i] / T[i * n + i];
-		for (int k = i + 1; k < n; k++) {
+		for (size_t k = i + 1; k < n; k++) {
 			T[j * n + k] =
 			    T[j * n + k] - T[j * n + i] * T[i * n + k];
 		}
@@ -28,7 +28,7 @@ void lu_decomposition(const double *const A, double *T, const size_t n) {
 	// L and U
 	init_T(A, T, n);
 	// Comput L and U
-	for (int i = 0; i < n - 1; i++) {
+	for (size_t i = 0; i < n - 1; i++) {
 		eliminate_step_i(T, n, i);
 	}
 }
