@@ -39,8 +39,7 @@ int main(int argc, char *argv[]) {
 			invertible = is_invertible(A_copy, n);
 		}
 		free(A_copy);
-
-		// Test the invert functions
+		//  Test the invert functions
 		flush_cache();
 		printf("test_strassen_invert_naive_matmat time: %lf\n",
 		       test_strassen_invert_naive_matmat(&A, n, 0.001));

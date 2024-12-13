@@ -30,7 +30,11 @@ void flush_cache() {
 	}
 }
 
-double randfrom() { return (double)rand() / RAND_MAX; }
+double randfrom() {
+	double a = (double)rand() / RAND_MAX;
+	int p_o_m = a < 0.5 ? 1 : 0;
+	return p_o_m * (-1) + (double)rand() / RAND_MAX;
+}
 
 void gen_rand_matrix(double *A, const size_t m, const size_t n) {
 	for (size_t i = 0; i < m * n; i++) {
