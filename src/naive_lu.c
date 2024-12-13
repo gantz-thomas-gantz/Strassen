@@ -2,40 +2,38 @@
  * DESC: Module for LU decomposition.
  * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
  */
+#include "naive_lu.h"
 
-// Function to initialize T to A
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "../include/IO.h"
+
 static void init_T(const double *A, double *T, const size_t n) {
 	memcpy(T, A, sizeof(double) * n * n);
 }
 
-static void eliminate_step_i(double *T, const int n, const int i) {
-	for (int j = i + 1; j < n; j++) {
+static void eliminate_step_i(double *T, const size_t n, int i) {
+	for (size_t j = i + 1; j < n; j++) {
 		T[j * n + i] = T[j * n + i] / T[i * n + i];
-		for (int k = i + 1; k < n; k++) {
+		for (size_t k = i + 1; k < n; k++) {
 			T[j * n + k] =
 			    T[j * n + k] - T[j * n + i] * T[i * n + k];
 		}
 	}
 }
 
-void lu_decomposition(const double *const A, double *T, size_t n) {
+void lu_decomposition(const double *const A, double *T, const size_t n) {
 	// L and U
 	init_T(A, T, n);
 	// Comput L and U
-	printf("Printing A \n");
-	print_mat_double(A, n);
-	for (int i = 0; i < n - 1; i++) {
-		printf("Step %d:\n", i);
-		printf("Printing T before elimination\n");
-		print_mat_double(T, n);
+	for (size_t i = 0; i < n - 1; i++) {
 		eliminate_step_i(T, n, i);
-		printf("Printing T after elimination\n");
-		print_mat_double(T, n);
-		printf("\n");
 	}
 }
 
-void lu_invert(const double *const A, double *inverse_A, size_t n) {
+void lu_invert(const double *const A, double *inverse_A, const size_t n) {
 	// Allocate space for the LU matrix
 	double *T = (double *)malloc(sizeof(double) * n * n);
 	// Perform LU decomposition

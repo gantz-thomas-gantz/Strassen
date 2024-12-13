@@ -10,7 +10,6 @@
 #include "../include/block_utilities.h"
 #include "../include/naive_matmat.h"
 #include "../include/strassen_matmat.h"
-// TODO: Make identity padding
 
 static void id_pad_matrix(double **A, size_t n, size_t *new_n) {
 	*new_n = (n % 2 == 0) ? n : n + 1;

@@ -10,8 +10,6 @@
 #include "../include/block_utilities.h"
 #include "../include/naive_matmat.h"
 
-// TODO: Maybe instead of creating a new matrix, simply realloc the old one and
-// memcpy the values correctly within new memory to account for padding?
 void pad_matrix(double **A, size_t m, size_t n, size_t *new_m, size_t *new_n) {
 	*new_m = (m % 2 == 0) ? m : m + 1;
 	*new_n = (n % 2 == 0) ? n : n + 1;

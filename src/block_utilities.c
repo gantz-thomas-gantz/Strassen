@@ -1,3 +1,7 @@
+/*
+ * DESC: Operations on block matrices utilities module.
+ * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
+ */
 #include "block_utilities.h"
 
 #include <assert.h>

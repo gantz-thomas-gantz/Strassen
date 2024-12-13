@@ -2,8 +2,6 @@
  * DESC: Module for naive matrix multiplication.
  * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
  */
-// TODO: generate same random matrix for same functionality such that tests are
-// comparable (done for inversion, todo for multiplication)
 #include <cblas.h>
 #include <lapacke.h>
 #include <math.h>
@@ -16,7 +14,8 @@
 #include <unistd.h>
 
 #include "../include/IO.h"
-//#include "../include/lu_naive.h"
+#include "../include/lu_naive.h"
+#include "../include/naive_lu.h"
 #include "../include/naive_matmat.h"
 #include "../include/strassen_inv.h"
 #include "../include/strassen_matmat.h"
@@ -32,14 +31,15 @@ void flush_cache() {
 	}
 }
 
-/* generate a random floating point number from min to max */
-double randfrom(double min, double max) {
-	return (double)rand() / RAND_MAX;  // * (max - min);
+double randfrom() {
+	double a = (double)rand() / RAND_MAX;
+	int p_o_m = a < 0.5 ? 1 : 0;
+	return p_o_m * (-1) + (double)rand() / RAND_MAX;
 }
 
 void gen_rand_matrix(double *A, const size_t m, const size_t n) {
 	for (size_t i = 0; i < m * n; i++) {
-		A[i] = randfrom(0., 1.);
+		A[i] = randfrom();
 	}
 }
 
@@ -50,12 +50,12 @@ int compare_mat(const double *const A, const double *const B, const size_t m,
 	return 1;
 }
 
-double test_naive_matmat(double **A, double **B, const size_t m, const size_t n, const size_t k, const double eps) {
-	
+double test_naive_matmat(double **A, double **B, const size_t m, const size_t n,
+			 const size_t k, const double eps) {
 	double *C_gt = malloc(m * k * sizeof(double));
 	cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, k, n, 1., *A,
 		    n, *B, k, 0., C_gt, k);
-	
+
 	double *C = malloc(m * k * sizeof(double));
 	clock_t start = clock();  // Record start time
 	naive_matmat(*A, *B, C, m, n, k);
@@ -65,14 +65,14 @@ double test_naive_matmat(double **A, double **B, const size_t m, const size_t n,
 
 	double result = -1.0;
 	if (compare_mat(C, C_gt, m, k, eps)) result = time_spent;
-	
+
 	free(C);
 	free(C_gt);
 
 	return result;
 }
-double test_strassen_matmat(double **A, double **B, const size_t m, const size_t n, const size_t k, const double eps) {
-	
+double test_strassen_matmat(double **A, double **B, const size_t m,
+			    const size_t n, const size_t k, const double eps) {
 	double *C_gt = malloc(m * k * sizeof(double));
 	cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, k, n, 1., *A,
 		    n, *B, k, 0., C_gt, k);
@@ -83,10 +83,10 @@ double test_strassen_matmat(double **A, double **B, const size_t m, const size_t
 	clock_t end = clock();	// Record end time
 	double time_spent =
 	    (double)(end - start) / CLOCKS_PER_SEC;  // Calculate elapsed time
-	
+
 	double result = -1.0;
 	if (compare_mat(C, C_gt, m, k, eps)) result = time_spent;
-	
+
 	free(C);
 	free(C_gt);
 
@@ -151,5 +151,11 @@ double test_strassen_invert_naive_matmat(double **A, const size_t n,
 	return result;
 };
 
-
+double test_lu_invert(const double *const A, const size_t n, const double eps) {
+	double *inverse_A = calloc(n * n, sizeof(double));
+	double *inverse_A_gt = calloc(n * n, sizeof(double));
+	int *ipiv = malloc(n * sizeof(int));  // Pivot indices
+	memcpy(inverse_A_gt, A, n * n * sizeof(double));
+	LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, inverse_A_gt, n, ipiv);
+	LAPACKE_dgetri(LAPACK_ROW_MAJOR, n, inverse_A_gt, n, ipiv);
 
