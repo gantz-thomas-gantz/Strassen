@@ -1,3 +1,0 @@
-/home/janmarxen/MU4IN901/MOD/build/CMakeFiles/main.dir
-/home/janmarxen/MU4IN901/MOD/build/CMakeFiles/edit_cache.dir
-/home/janmarxen/MU4IN901/MOD/build/CMakeFiles/rebuild_cache.dir
