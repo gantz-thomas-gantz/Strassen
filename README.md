@@ -4,6 +4,7 @@
 - `include/`: Contains header files.
 - `CMakeLists.txt`: Defines the build configuration.
 - `build/`: Created during building of CMake project and eventually holds the compiled binary.
+- `data/`: Data containing test results.
 - `README.md`: This file.
 
 ## Prerequisites
