@@ -12,7 +12,7 @@ Ensure you have the following installed on your system:
 
 - GCC or Clang (for compiling C code)
 - CMake (version 3.10 or higher recommended)
-- CBLAS and LAPACK. Ubunto: sudo apt install libopenblas-dev liblapack-dev
+- CBLAS and LAPACK. Ubuntu: sudo apt install libopenblas-dev liblapack-dev
 
 
 ## Compilation
@@ -33,6 +33,10 @@ Follow these steps to compile and run the project:
    ```bash
    ./main <test size (default 5)>
    ```
+
+4. See results in console or optionally in build/matinv.txt and
+   build/matmat.txt.
+
 
 ## Notes
 

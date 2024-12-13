@@ -3,8 +3,13 @@
  * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
  */
 
-#include <stddef.h>  // for size_t
+#include <stddef.h>
 
+/*
+ * Description:
+ * Flush cache by initializing and accessing a big enough array to occupy the
+ * 32MB cache.
+ */
 void flush_cache();
 
 /*
@@ -22,7 +27,7 @@ int compare_mat(const double *const A, const double *const B, const size_t m,
 
 /*
  * Description:
- * Generate a random double matrix.
+ * Generate a random double matrix with values [-1,1].
  *
  * Arguments:
  * - `A`: Pointer to the array where the generated matrix will be stored.
@@ -45,7 +50,8 @@ void gen_rand_matrix(double *A, const size_t m, const size_t n);
  * Matrix format:
  * Matrices should be flattened arrays in row-major format.
  */
-double test_naive_matmat(double **A, double **B, const size_t m, const size_t n, const size_t k, const double eps);
+double test_naive_matmat(double **A, double **B, const size_t m, const size_t n,
+			 const size_t k, const double eps);
 
 /*
  * Description:
@@ -58,7 +64,8 @@ double test_naive_matmat(double **A, double **B, const size_t m, const size_t n,
  * Matrix format:
  * Matrices should be flattened arrays in row-major format.
  */
-double test_strassen_matmat(double **A, double **B, const size_t m, const size_t n, const size_t k, const double eps);
+double test_strassen_matmat(double **A, double **B, const size_t m,
+			    const size_t n, const size_t k, const double eps);
 
 /*
  * Description:

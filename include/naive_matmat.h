@@ -3,7 +3,7 @@
  * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
  */
 
-#include <stddef.h>  // for size_t
+#include <stddef.h>
 
 /*
  * Description:

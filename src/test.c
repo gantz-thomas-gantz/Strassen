@@ -32,7 +32,7 @@ void flush_cache() {
 	}
 }
 
-double randfrom() {
+static double randfrom() {
 	double a =
 	    (double)rand() / RAND_MAX;	// Generate a random double in [0, 1]
 	int p_o_m =

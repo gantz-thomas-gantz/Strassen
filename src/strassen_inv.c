@@ -31,7 +31,8 @@ static void id_pad_matrix(double **A, size_t n, size_t *new_n) {
 	}
 }
 
-void id_depad_matrix(double **padded_A, const size_t n, const size_t og_n) {
+static void id_depad_matrix(double **padded_A, const size_t n,
+			    const size_t og_n) {
 	if (n == og_n) {
 		return;
 	}
