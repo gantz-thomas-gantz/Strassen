@@ -1,9 +1,9 @@
 /*
- * DESC: Module for naive matrix multiplication.
+ * DESC: Module for strassen matrix multiplication.
  * AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
  */
 #include <assert.h>
-#include <stddef.h>  // for size_t
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,59 +11,70 @@
 #include "../include/naive_matmat.h"
 
 void pad_matrix(double **A, size_t m, size_t n, size_t *new_m, size_t *new_n) {
-	*new_m = (m % 2 == 0) ? m : m + 1;
-	*new_n = (n % 2 == 0) ? n : n + 1;
+	*new_m = (m % 2 == 0) ? m : m + 1;  // Ensure rows are even
+	*new_n = (n % 2 == 0) ? n : n + 1;  // Ensure columns are even
+
 	if (!(m % 2 == 0) || !(n % 2 == 0)) {
-		// Calculate new dimensions
-		// Allocate memory for the new padded matrix
+		// Allocate new memory for the padded matrix
 		double *padded_A =
 		    (double *)calloc((*new_m) * (*new_n), sizeof(double));
-		// Copy elements from the original matrix to the padded matrix
+
+		// Copy the original data into the padded matrix
 		for (size_t i = 0; i < m; i++)
 			for (size_t j = 0; j < n; j++)
 				padded_A[i * (*new_n) + j] = (*A)[i * n + j];
-		free(*A);
-		*A = padded_A;
+
+		free(*A);	// Free the old memory
+		*A = padded_A;	// Point to the new padded matrix
 	}
 }
 
 void depad_matrix(double **padded_A, size_t m, size_t n, size_t og_m,
 		  size_t og_n) {
-	// If the padded dimensions match the original, no need to depad
+	// If no padding was applied, no action is needed
 	if (m == og_m && n == og_n) {
 		return;
 	}
-	// Allocate memory for the original matrix
+
+	// Allocate memory for the original matrix without padded extra space
 	double *A = (double *)malloc(og_m * og_n * sizeof(double));
-	// Copy elements from the padded matrix to the original matrix
+
+	// Copy valid elements back from the padded matrix
 	for (size_t i = 0; i < og_m; i++) {
 		for (size_t j = 0; j < og_n; j++) {
 			A[i * og_n + j] = (*padded_A)[i * n + j];
 		}
 	}
-	free(*padded_A);
-	*padded_A = A;
+
+	free(*padded_A);  // Free padded memory
+	*padded_A = A;	  // Point to the depadded version
 }
 
 void strassen_matmat(double **A, double **B, double **C, size_t m, size_t n,
 		     size_t k) {
+	// If matrices are too small, fallback to naive matrix multiplication
 	if (m < 512 && n < 512 && k < 512) {
 		naive_matmat(*A, *B, *C, m, n, k);
 	} else if (m == 1 && n == 1) {
+		// Handle base case of single-element multiplication
 		for (size_t i = 0; i < m * k; i++) (*C)[i] = (*A)[0] * (*B)[i];
 	} else if (n == 1 && k == 1) {
+		// Handle special single-row/column edge case
 		for (size_t i = 0; i < m * k; i++) (*C)[i] = (*A)[i] * (*B)[0];
 	} else {
+		// Initialize result matrix to zero
 		for (size_t i = 0; i < m * k; i++) (*C)[i] = 0;
 
-		// Pad matrices if needed
+		// Pad matrices to ensure they have compatible even dimensions
 		size_t og_m = m;
 		size_t og_n = n;
 		size_t og_k = k;
 		pad_matrix(A, og_m, og_n, &m, &n);
 		pad_matrix(B, og_n, og_k, &n, &k);
 		pad_matrix(C, og_m, og_k, &m, &k);
-		// Define block start indices
+
+		// Subdivide matrices into blocks for Strassen's recursive
+		// computation
 		const size_t start_a = 0;
 		const size_t start_x = 0;
 		const size_t start_r11 = 0;
@@ -76,8 +87,9 @@ void strassen_matmat(double **A, double **B, double **C, size_t m, size_t n,
 		const size_t start_d = start_c + start_b;
 		const size_t start_t = start_y + start_z;
 		const size_t start_r22 = start_r12 + start_r21;
-		// Deep copy block matrices into contiguous memory
-		// TODO: Instead of creating blocks for adding their values
+
+		// Extract matrix blocks (allocate contiguous memory dynamically
+		// for sub-matrices)
 		double *a = create_block(*A, start_a, m, n);
 		double *d = create_block(*A, start_d, m, n);
 		double *y = create_block(*B, start_y, n, k);
@@ -87,7 +99,8 @@ void strassen_matmat(double **A, double **B, double **C, size_t m, size_t n,
 		    (double *)malloc(m / 2 * n / 2 * sizeof(double));
 		double *tempB =
 		    (double *)malloc(n / 2 * k / 2 * sizeof(double));
-		// Compute q coefficients
+
+		// Strassen's recursive multiplications
 		double *q1 = (double *)malloc(m * k / 4 * sizeof(double));
 		darray_block_add(*B, tempB, start_x, start_z, n, k, 1.0);
 		strassen_matmat(&a, &tempB, &q1, m / 2, n / 2, k / 2);
@@ -122,6 +135,7 @@ void strassen_matmat(double **A, double **B, double **C, size_t m, size_t n,
 		darray_block_add(*A, tempA, start_c, start_d, m, n, -1.0);
 		strassen_matmat(&tempA, &y, &q7, m / 2, n / 2, k / 2);
 		free(y);
+
 		// Calculate the R blocks
 		// R11
 		mat_inplace_block_add(*C, q1, q5, start_r11, m, k, 1.0, 1.0);
@@ -133,7 +147,7 @@ void strassen_matmat(double **A, double **B, double **C, size_t m, size_t n,
 		mat_inplace_block_add(*C, q4, q5, start_r12, m, k, 1.0, -1.0);
 		// R22
 		mat_inplace_block_add(*C, q2, q7, start_r22, m, k, 1.0, 1.0);
-		// Write back to C
+
 		free(q1);
 		free(q2);
 		free(q3);
@@ -141,7 +155,8 @@ void strassen_matmat(double **A, double **B, double **C, size_t m, size_t n,
 		free(q5);
 		free(q6);
 		free(q7);
-		// Depad
+
+		// Cleanup padding
 		depad_matrix(A, m, n, og_m, og_n);
 		depad_matrix(B, n, k, og_n, og_k);
 		depad_matrix(C, m, k, og_m, og_k);
