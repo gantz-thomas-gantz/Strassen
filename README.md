@@ -1,3 +1,4 @@
+AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
 ## Project Structure
 
 - `src/`: Contains source code files.

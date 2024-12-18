@@ -1,3 +1,4 @@
+#AUTHORS: Thomas Gantz, Laura Paxton, Jan Marxen
 cmake_minimum_required(VERSION 3.12)
 
 project(MOD)
