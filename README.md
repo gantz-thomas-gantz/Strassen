@@ -29,6 +29,16 @@ Follow these steps to compile and run the project:
    ```bash
    make
    ```
+   If the make tries to execute instructions incompatible with your system, 
+   go back to the root of the project and run:
+   ```bash
+   rm -rf build
+   cmake -B  build
+   cmake --build build
+   cd build
+   make
+   ```
+   
 
 3. Run the executable to run the tests:
    ```bash
